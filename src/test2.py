@@ -3,16 +3,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import os
 import time
-#ex: make_player_csv("https://www.basketball-reference.com/wnba/players/w/willico01w/gamelog/2025/",'courtney')
+from test import soup
 
-#wnba specifcally
-#don't request to fast or too much because basket ball refernce will block your request.
-
-#makes a csv file for a player using basket ball reference data, give url for specifc year game log for player
-#and input the name you want the csv file to be named which is also what will show up in program.
-
-
-# gets data from basketball reference website
 def add_combined_stats_stat(player):
     player['PAR'] = player['PTS']+player['AST']+player['TRB']
     player['PA'] = player['PTS']+player['AST']
@@ -70,9 +62,7 @@ def clean_data(df):
         if col not in ['Date', 'pos', 'Team', 'Opp', 'Result', 'MP', 'Where']:
             table5[col] = pd.to_numeric(table5[col], errors='coerce')
 
-    #modifies the df so that it contains PAR PA PR        
     add_combined_stats_stat(table5)
-    return table5
 
 def update_player_csv(url,name):
     data = clean_data(get_data_using_url(url))
@@ -92,4 +82,3 @@ def update_player_csv(url,name):
     # save CSV inside 'data' folder
     file_path = os.path.join(team_path, name + '.csv')
     data.to_csv(file_path, index=False)
-

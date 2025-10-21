@@ -16,4 +16,4 @@ Important Notes:
 """
     #   updates:
 
-
+update_player_csv('https://www.basketball-reference.com/players/c/curryst01/gamelog/2025','curry')
