@@ -1,0 +1,10 @@
+## 📦 `requirements.txt`
+
+```txt
+pandas
+numpy
+requests
+beautifulsoup4
+lxml
+matplotlib
+tk
