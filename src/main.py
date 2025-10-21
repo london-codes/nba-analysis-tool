@@ -16,7 +16,7 @@ root.geometry("1500x700")
 
 
 # default values for each button
-array_of_all_stats=['PTS','AST','TRB','FGA','PAR','PA','PR']
+array_of_all_stats=['PTS','AST','TRB','FGA','PAR','PA','PR','AR']
 selected_team = tk.StringVar(value=list(teams.keys())[0])
 selected_player1 = tk.StringVar(value='choose team')
 selected_player2 = tk.StringVar(value='choose team')

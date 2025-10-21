@@ -35,6 +35,7 @@ update_player_csv('https://www.basketball-reference.com/players/k/kuminjo01/game
 update_player_csv('https://www.basketball-reference.com/players/p/podzibr01/gamelog/2025','brandin')
 update_player_csv('https://www.basketball-reference.com/players/h/hieldbu01/gamelog/2025','buddy')
 """
+"""
 #min
 update_player_csv('https://www.basketball-reference.com/players/r/reidna01/gamelog/2025','naz')
 update_player_csv('https://www.basketball-reference.com/players/m/mcdanja02/gamelog/2025','jaden')
@@ -60,3 +61,15 @@ update_player_csv('https://www.basketball-reference.com/players/b/barrerj01/game
 update_player_csv('https://www.basketball-reference.com/players/q/quickim01/gamelog/2025','immanuel') #injuired a lot 2025
 update_player_csv('https://www.basketball-reference.com/players/b/barnesc01/gamelog/2025','scottie')
 #update_player_csv('https://www.basketball-reference.com/players/i/ingrabr01/gamelog/2025','brandon') no 2025
+"""
+#nyk
+update_player_csv('https://www.basketball-reference.com/players/r/robinmi01/gamelog/2025','mitchell') # did not play like entire 3/4 2025
+update_player_csv('https://www.basketball-reference.com/players/m/mcbrimi01/gamelog/2025','miles')
+update_player_csv('https://www.basketball-reference.com/players/h/hartjo01/gamelog/2025','josh')
+update_player_csv('https://www.basketball-reference.com/players/a/anunoog01/gamelog/2025','OG')
+update_player_csv('https://www.basketball-reference.com/players/b/brunsja01/gamelog/2025','jalen')
+update_player_csv('https://www.basketball-reference.com/players/b/bridgmi01/gamelog/2025','mikal')
+update_player_csv('https://www.basketball-reference.com/players/t/townska01/gamelog/2025','karl-anthony')
+#update_player_csv('https://www.basketball-reference.com/players/y/yabusgu01/gamelog/2025','guershon') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/c/clarkjo01/gamelog/2025','jordan') # no 2025
+
