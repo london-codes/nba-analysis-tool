@@ -92,7 +92,7 @@ update_player_csv('https://www.basketball-reference.com/players/c/carusal01/game
 update_player_csv('https://www.basketball-reference.com/players/h/harteis01/gamelog/2025','isaiah')
 
 """
-#phx
+#pho/phx
 update_player_csv('https://www.basketball-reference.com/players/a/allengr01/gamelog/2025','grayson')
 update_player_csv('https://www.basketball-reference.com/players/o/onealro01/gamelog/2025','royce')
 update_player_csv('https://www.basketball-reference.com/players/b/bookede01/gamelog/2025','devin')

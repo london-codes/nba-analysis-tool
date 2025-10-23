@@ -37,7 +37,21 @@ def team_combinations(team,stats):
         correlations.append(r)
     return correlations
 
+def testing(team, selected_stats,test, test2 ):
 
+    team_combo = team_combinations(team, selected_stats)
+    r_coe = 0
+
+    flat = [[float(item[r_coe])] + item[1:] for sublist in team_combo for item in sublist]
+    sorted_flat = sorted(flat, key=itemgetter(r_coe))
+
+    for row in sorted_flat[-60:][::-1]:
+        formatted_row  = [f"{row[0]:.4f}"] + row[1:]
+        test.insert(tk.END, str(formatted_row ) + "\n")
+
+    for row in sorted_flat[:60]:
+        formatted_row  = [f"{row[0]:.4f}"] + row[1:]
+        test2.insert(tk.END, str(formatted_row ) + "\n")
 
 
 # displays team_combinations in 2 scrollable boxes holding highest absolute value correlations

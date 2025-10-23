@@ -5,6 +5,7 @@ from load_csvs import load_groups_auto
 from graph import graph_two
 from corr_combos import all_correlation_combinations
 
+from corr_combos import testing
 # loading in data keys are names for teams and each key is a array holding the table for each player
 teams = load_groups_auto()
 
@@ -44,15 +45,30 @@ player1_stat.place(x=900,y=40)
 player2_stat = tk.OptionMenu(root, selected_player2_stat, *array_of_all_stats)
 player2_stat.place(x=1000,y=40)
 
-# gives positive and negative correaltion scrollable boxes to see highest correlations
-pos_box = ScrolledText(root, width=60, height=25)
-pos_box.place(x=0, y=150)
-neg_box = ScrolledText(root, width=60, height=25)
-neg_box.place(x=400, y=150)
 
 # give box for graph
 graph_frame = tk.Frame(root, width=600, height=400)
 graph_frame.place(x=900, y=150)
+
+def on_line_click(event):
+    """Callback when a line in the Text widget is clicked."""
+    index = event.widget.index(f"@{event.x},{event.y}")
+    line_number = int(index.split('.')[0])
+    line_content = event.widget.get(f"{line_number}.0", f"{line_number}.end")
+    print(f"Clicked on line {line_number}: '{line_content}'")
+
+def create_scrollable_clickable_text(parent, width=30, height=10, x=0, y=0):
+    """Creates a smaller ScrolledText widget with clickable lines."""
+    text_widget = ScrolledText(parent, wrap=tk.WORD, width=width, height=height)
+    text_widget.place(x=x, y=y)
+    text_widget.bind("<Button-1>", on_line_click)
+    return text_widget
+
+
+# gives positive and negative correaltion scrollable boxes to see highest correlations
+my_text_area = create_scrollable_clickable_text(root, width=60, height=25, x=0, y=150)
+my_text_area_neg = create_scrollable_clickable_text(root, width=60, height=25, x=400, y=150)
+
 
 
 # updates the drop down menus for the visual graph
@@ -78,6 +94,7 @@ def update_players_for_graph_dropdown (team):
         selected_player2.set(team[0]['name'][0])
     
 
+
 # gives all correlation values for all combinations of players and there stats. Also updates other dropdown for graph
 def confirm_selection():
     choice = selected_team.get()                                  
@@ -88,7 +105,7 @@ def confirm_selection():
     selected_stats= []                                          # get array of the selected stats
     for i in indices:
         selected_stats.append(array_of_all_stats[i])
-    all_correlation_combinations(team_choice,selected_stats, pos_box, neg_box)
+    testing(team_choice,selected_stats, my_text_area, my_text_area_neg)
 
 
 # function that calls to graph two players and there two stats for visual aid of something specifc you want to look at
