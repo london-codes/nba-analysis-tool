@@ -37,7 +37,7 @@ def team_combinations(team,stats):
         correlations.append(r)
     return correlations
 
-def testing(team, selected_stats,test, test2 ):
+def testing(team, selected_stats, test, test2):
 
     team_combo = team_combinations(team, selected_stats)
     r_coe = 0
