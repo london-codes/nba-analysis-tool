@@ -41,6 +41,9 @@ def testing(team, selected_stats, test, test2):
 
     team_combo = team_combinations(team, selected_stats)
     r_coe = 0
+    #need to reset the widget so old text goes new text inserted
+    test.delete(0, tk.END)
+    test2.delete(0, tk.END)
 
     flat = [[float(item[r_coe])] + item[1:] for sublist in team_combo for item in sublist]
     sorted_flat = sorted(flat, key=itemgetter(r_coe))
