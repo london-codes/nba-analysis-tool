@@ -50,24 +50,33 @@ player2_stat.place(x=1000,y=40)
 graph_frame = tk.Frame(root, width=600, height=400)
 graph_frame.place(x=900, y=150)
 
-def on_line_click(event):
-    """Callback when a line in the Text widget is clicked."""
-    index = event.widget.index(f"@{event.x},{event.y}")
-    line_number = int(index.split('.')[0])
-    line_content = event.widget.get(f"{line_number}.0", f"{line_number}.end")
-    print(f"Clicked on line {line_number}: '{line_content}'")
+def on_selection(event):
+    # Get the Listbox widget that triggered the event
+    widget = event.widget
+    
+    # Get the current selection (returns a tuple of indices)
+    selection = widget.curselection()
+    
+    if selection:  # If something is selected
+        index = selection[0]  # Get first selected index
+        value = widget.get(index)  # Get the corresponding value
+        print(f"You selected: {value}")
+        # Call any other function here
+        do_something(value)
 
-def create_scrollable_clickable_text(parent, width=30, height=10, x=0, y=0):
-    """Creates a smaller ScrolledText widget with clickable lines."""
-    text_widget = ScrolledText(parent, wrap=tk.WORD, width=width, height=height)
-    text_widget.place(x=x, y=y)
-    text_widget.bind("<Button-1>", on_line_click)
-    return text_widget
+def do_something(value):
+    # Example function triggered by selection
+    print("hi")
 
+def make_interactive_corr_box(width=30, height=10, x=0, y=0):
+    box = tk.Listbox(root, selectmode='single', width=width, height=height)
+    box.place(x=x, y=y)
+    box.bind("<<ListboxSelect>>", on_selection)
+    return box
 
-# gives positive and negative correaltion scrollable boxes to see highest correlations
-my_text_area = create_scrollable_clickable_text(root, width=60, height=25, x=0, y=150)
-my_text_area_neg = create_scrollable_clickable_text(root, width=60, height=25, x=400, y=150)
+# gives interactive positive and negative correaltion scrollable boxes to see highest correlations
+pos_box = make_interactive_corr_box(width=60, height=25, x=0, y=150)
+neg_box = make_interactive_corr_box(width=60, height=25, x=400, y=150)
 
 
 
@@ -105,7 +114,7 @@ def confirm_selection():
     selected_stats= []                                          # get array of the selected stats
     for i in indices:
         selected_stats.append(array_of_all_stats[i])
-    testing(team_choice,selected_stats, my_text_area, my_text_area_neg)
+    testing(team_choice,selected_stats, pos_box, neg_box)
 
 
 # function that calls to graph two players and there two stats for visual aid of something specifc you want to look at
