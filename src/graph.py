@@ -13,50 +13,76 @@ def matching_games(player1, player2, stat1, stat2):
     )
     return pd.merge(xin, yin, on="Date")
 
+def over_under_count(sign, games, player1, player2, stat1, stat2):
+    player1_average = round(player1[stat1].mean() * 2) / 2 # all games average not specifc to matched games rounded to nearest .5
+    player2_average = round(player2[stat2].mean() * 2) / 2
+    player1_array = games[stat1 + '_1'] # stats for the for the matching games
+    player2_array = games[stat2 + '_2']
+    both_above = 0
+    both_below = 0
+    if (sign > 0):
+        for game in range(len(games)):
+            if (player1_array[game] >= player1_average) and (player2_array[game] >= player2_average):
+                both_above += 1
+            elif (player1_array[game] <= player1_average) and (player2_array[game] <= player2_average):
+                both_below += 1
+    else:
+        for game in range(len(games)):
+            if (player1_array[game] >= player1_average) and (player2_array[game] <= player2_average):
+                both_above += 1
+            elif (player1_array[game] <= player1_average) and (player2_array[game] >= player2_average):
+                both_below += 1
+    return both_above, both_below, len(games), player1_average, player2_average
+#what we want both above both below and both of those combine and for each of those there percentage: player names probably and len games
 
 # gives graph of two chosen players and two chosen stats gives both non-standized graph
 def graph_two(player1, player2, stat1, stat2):
-
-    # making a table where game dates are mached with wanted qualities and standardizing it
+    # Get matched games
     games = matching_games(player1, player2, stat1, stat2)
 
-    # display correlation coefficient
-    r_coe = np.corrcoef(games.loc[:,stat1 + '_1'], games.loc[:,stat2 + '_2'])[0, 1] #[0, 1] is just selecting the right number out of a matrix
+    # Correlation coefficient
+    r_coe = np.corrcoef(games.loc[:, stat1 + '_1'], games.loc[:, stat2 + '_2'])[0, 1]
 
-    # display the amount of games where both players went over there average or both players went below the average
-    #if statment t osee of r_coe is positive so then we wont both over under both over otherwise its alterantive
+    # Over/under counts
+    both_above, both_below, total_games, player1_average, player2_average = over_under_count(r_coe, games, player1, player2, stat1, stat2)
 
-    average_player1 = player1[stat1].mean()
-    average_player2 = player2[stat2].mean()
-    player1_array = games[stat1 + '_1']
-    player2_array = games[stat2 + '_2']
-    print(games)
-    print(len(games))
-    both_above = 0
-    both_below = 0
-    print(player1_array)
-    print(player2_array)
-    for game in range(len(games)):
-        if (player1_array[game] >= average_player1) and (player2_array[game] >= average_player2):
-            both_above += 1
-        elif (player1_array[game] <= average_player1) and (player2_array[game] <= average_player2):
-            both_below += 1
-    print(average_player1)
-    print(average_player2)
-    print(both_below)
-    print(both_above)
-    print(len(games))
-    # non-standardized graph
+    # Percentages
+    both_above_percent = round(both_above / total_games * 100, 1)
+    both_below_percent = round(both_below / total_games * 100, 1)
+    count_correlation = both_above + both_below
+    count_correlation_percent = round(count_correlation / total_games * 100, 1)
+
+    # Non-standardized scatter plot
     fig = Figure(figsize=(6, 5.5))
     ax = fig.add_subplot(111)
-
-    # scatter plot 
     ax.scatter(games[f'{stat1}_1'], games[f'{stat2}_2'], color='blue')
-    ax.set_xlabel(f"{games['name_1'][0]} {stat1}")                                 # games['name_1'][0] gets name from name column
+    ax.set_xlabel(f"{games['name_1'][0]} {stat1}")
     ax.set_ylabel(f"{games['name_2'][0]} {stat2}")
-    ax.set_title('Compare same game stats between players\n' +
-                 'correlation coefficient = '+ str(round(r_coe,4)) + '\n'+
-                 'testing')
 
-    # could add standardized table
+    # Add yellow average lines
+    ax.axvline(player1_average, color='red', linestyle='--', alpha=0.3, label=f"{games['name_1'][0]} avg")
+    ax.axhline(player2_average, color='red', linestyle='--', alpha=0.3, label=f"{games['name_2'][0]} avg")
+    # Dynamic over/under labels
+    if r_coe >= 0:
+        over_label = f"Both above: {both_above}/{total_games} ({both_above_percent}%)"
+        under_label = f"Both below: {both_below}/{total_games} ({both_below_percent}%)"
+    else:
+        over_label = f"{games['name_1'][0]} over: {both_above}/{total_games} ({both_above_percent}%)"
+        under_label = f"{games['name_2'][0]} over: {both_below}/{total_games} ({both_below_percent}%)"
+
+    # Clean, multi-line title
+    ax.set_title(
+        f"{games['name_1'][0]} {stat1} ({player1_average}) vs {games['name_2'][0]} {stat2} ({player2_average})\n"
+        f"r_coefficient = {r_coe:.4f} | Count correlation = {count_correlation}/{total_games} ({count_correlation_percent}%)\n"
+        f"{over_label} | {under_label}"
+    )
+    
     return fig
+
+"""
+f"{games['name_1'][0]} {stat1} vs {games['name_2'][0]} {stat2}\n"
+    f"r_coefficient = {r_coe:.4f} | "
+    f"Both over/both under = {count_correlation}/{same_number_games} "
+    f"({count_correlation_percent:.1f}%)"
+
+"""
