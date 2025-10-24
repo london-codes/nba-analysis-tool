@@ -3,9 +3,8 @@ import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from load_csvs import load_groups_auto
 from graph import graph_two
-from corr_combos import all_correlation_combinations
 import ast
-from corr_combos import testing
+from corr_combos import all_correlation_combinations_interactive
 # loading in data keys are names for teams and each key is a array holding the table for each player
 teams = load_groups_auto()
 
@@ -15,15 +14,16 @@ teams = load_groups_auto()
 root = tk.Tk()
 root.geometry("1500x700")
 
-
+##########possible add Free throws attempted
 # default values for each button
-array_of_all_stats=['PTS','AST','TRB','FGA','PAR','PA','PR','AR']
+array_of_all_stats=['PTS','AST','TRB','FGA','PAR','PA','PR','AR'] 
 selected_team = tk.StringVar(value=list(teams.keys())[0])
 selected_player1 = tk.StringVar(value='choose team')
 selected_player2 = tk.StringVar(value='choose team')
 selected_player1_stat = tk.StringVar(value='PTS')
 selected_player2_stat = tk.StringVar(value='PTS')
 
+# region BUTTONS AND DROP DOWN MENUS
 # select team to get combinations for
 team_dropdown = tk.OptionMenu(root, selected_team, *teams.keys())
 team_dropdown.place(x=0,y=0)
@@ -44,14 +44,11 @@ player1_stat = tk.OptionMenu(root, selected_player1_stat, *array_of_all_stats)
 player1_stat.place(x=900,y=40)
 player2_stat = tk.OptionMenu(root, selected_player2_stat, *array_of_all_stats)
 player2_stat.place(x=1000,y=40)
-
+# endregion
 
 # give box for graph
 graph_frame = tk.Frame(root, width=600, height=400)
 graph_frame.place(x=900, y=150)
-
-
-
 
 
 # updates the drop down menus for the visual graph
@@ -87,10 +84,13 @@ def confirm_selection():
     selected_stats= []                                          # get array of the selected stats
     for i in indices:
         selected_stats.append(array_of_all_stats[i])
-    testing(team_choice,selected_stats, pos_box, neg_box)
+    all_correlation_combinations_interactive(team_choice,selected_stats, pos_box, neg_box)
 
 
-def on_selection(event):
+
+
+# region #MAKING INTERACTIVE CORRELATION TEXT BOX THAT GRAPHS WHEN CLICKED, INCLUDES FUNCTIONS
+def on_selection_corr_box(event):
     # Get the Listbox widget that triggered the event
     widget = event.widget
     
@@ -102,16 +102,15 @@ def on_selection(event):
         corr_data = widget.get(index)  # Get the corresponding value
         print(f"You selected: {corr_data}")
         # Call any other function here
-        do_something(corr_data)
+        graph_from_list(corr_data)
 
-
-def do_something(corr_data):
-    for widget in graph_frame.winfo_children():
+def graph_from_list(corr_data):
+    for widget in graph_frame.winfo_children(): # clears before
         widget.destroy()
     player1 = None
     player2 = None
-    corr_data = ast.literal_eval(corr_data)
-    for player in teams[selected_team.get()]:
+    corr_data = ast.literal_eval(corr_data) #converts the string of the array to an array
+    for player in teams[selected_team.get()]: # finding the two players in the team by searching name column of each df
         if  player['name'].iloc[0] == corr_data[2]:
             player1 = player
         if  player['name'].iloc[0] == corr_data[3]:
@@ -126,13 +125,13 @@ def do_something(corr_data):
 def make_interactive_corr_box(width=30, height=10, x=0, y=0):
     box = tk.Listbox(root, selectmode='single', width=width, height=height)
     box.place(x=x, y=y)
-    box.bind("<<ListboxSelect>>", on_selection)
+    box.bind("<<ListboxSelect>>", on_selection_corr_box)
     return box
 
 # gives interactive positive and negative correaltion scrollable boxes to see highest correlations
 pos_box = make_interactive_corr_box(width=60, height=25, x=0, y=150)
 neg_box = make_interactive_corr_box(width=60, height=25, x=400, y=150)
-
+# endregion
 
 # function that calls to graph two players and there two stats for visual aid of something specifc you want to look at
 def confirm_graph():
