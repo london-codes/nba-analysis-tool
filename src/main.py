@@ -100,7 +100,6 @@ def on_selection_corr_box(event):
     if selection:  # If something is selected
         index = selection[0]  # Get first selected index
         corr_data = widget.get(index)  # Get the corresponding value
-        print(f"You selected: {corr_data}")
         # Call any other function here
         graph_from_list(corr_data)
 
