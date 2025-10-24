@@ -4,7 +4,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from load_csvs import load_groups_auto
 from graph import graph_two
 from corr_combos import all_correlation_combinations
-
+import ast
+from corr_combos import testing
 # loading in data keys are names for teams and each key is a array holding the table for each player
 teams = load_groups_auto()
 
@@ -44,15 +45,13 @@ player1_stat.place(x=900,y=40)
 player2_stat = tk.OptionMenu(root, selected_player2_stat, *array_of_all_stats)
 player2_stat.place(x=1000,y=40)
 
-# gives positive and negative correaltion scrollable boxes to see highest correlations
-pos_box = ScrolledText(root, width=60, height=25)
-pos_box.place(x=0, y=150)
-neg_box = ScrolledText(root, width=60, height=25)
-neg_box.place(x=400, y=150)
 
 # give box for graph
 graph_frame = tk.Frame(root, width=600, height=400)
 graph_frame.place(x=900, y=150)
+
+
+
 
 
 # updates the drop down menus for the visual graph
@@ -80,7 +79,7 @@ def update_players_for_graph_dropdown (team):
 
 # gives all correlation values for all combinations of players and there stats. Also updates other dropdown for graph
 def confirm_selection():
-    choice = selected_team.get()                                  
+    choice = selected_team.get()
     team_choice = teams[choice]                                 # creating array with each player table as elements
     update_players_for_graph_dropdown(team_choice)              # call function to change drop down menu for dropwdown 2
     
@@ -88,7 +87,51 @@ def confirm_selection():
     selected_stats= []                                          # get array of the selected stats
     for i in indices:
         selected_stats.append(array_of_all_stats[i])
-    all_correlation_combinations(team_choice,selected_stats, pos_box, neg_box)
+    testing(team_choice,selected_stats, pos_box, neg_box)
+
+
+def on_selection(event):
+    # Get the Listbox widget that triggered the event
+    widget = event.widget
+    
+    # Get the current selection (returns a tuple of indices)
+    selection = widget.curselection()
+    
+    if selection:  # If something is selected
+        index = selection[0]  # Get first selected index
+        corr_data = widget.get(index)  # Get the corresponding value
+        print(f"You selected: {corr_data}")
+        # Call any other function here
+        do_something(corr_data)
+
+
+def do_something(corr_data):
+    for widget in graph_frame.winfo_children():
+        widget.destroy()
+    player1 = None
+    player2 = None
+    corr_data = ast.literal_eval(corr_data)
+    for player in teams[selected_team.get()]:
+        if  player['name'].iloc[0] == corr_data[2]:
+            player1 = player
+        if  player['name'].iloc[0] == corr_data[3]:
+            player2 = player
+    fig = graph_two(player1, player2, corr_data[1][0], corr_data[1][1])
+    
+    # embed figure into the existing frame
+    canvas = FigureCanvasTkAgg(fig, master=graph_frame)
+    canvas.draw()
+    canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+def make_interactive_corr_box(width=30, height=10, x=0, y=0):
+    box = tk.Listbox(root, selectmode='single', width=width, height=height)
+    box.place(x=x, y=y)
+    box.bind("<<ListboxSelect>>", on_selection)
+    return box
+
+# gives interactive positive and negative correaltion scrollable boxes to see highest correlations
+pos_box = make_interactive_corr_box(width=60, height=25, x=0, y=150)
+neg_box = make_interactive_corr_box(width=60, height=25, x=400, y=150)
 
 
 # function that calls to graph two players and there two stats for visual aid of something specifc you want to look at
