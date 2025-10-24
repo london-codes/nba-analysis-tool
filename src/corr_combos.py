@@ -37,26 +37,28 @@ def team_combinations(team,stats):
         correlations.append(r)
     return correlations
 
-def testing(team, selected_stats, test, test2):
+# displays team_combinations in 2 scrollable boxes holding highest absolute value correlations, can be clicekd to graph
+def all_correlation_combinations_interactive(team, selected_stats, pos_box, neg_box):
 
     team_combo = team_combinations(team, selected_stats)
     r_coe = 0
-    #need to reset the widget so old text goes new text inserted
-    test.delete(0, tk.END)
-    test2.delete(0, tk.END)
+
+    #reset the widget so old text goes new text can now be inserted
+    pos_box.delete(0, tk.END)
+    neg_box.delete(0, tk.END)
 
     flat = [[float(item[r_coe])] + item[1:] for sublist in team_combo for item in sublist]
     sorted_flat = sorted(flat, key=itemgetter(r_coe))
 
     for row in sorted_flat[-60:][::-1]:
         formatted_row  = [f"{row[0]:.4f}"] + row[1:]
-        test.insert(tk.END, str(formatted_row ) + "\n")
+        pos_box.insert(tk.END, str(formatted_row ) + "\n")
 
     for row in sorted_flat[:60]:
         formatted_row  = [f"{row[0]:.4f}"] + row[1:]
-        test2.insert(tk.END, str(formatted_row ) + "\n")
+        neg_box.insert(tk.END, str(formatted_row ) + "\n")
 
-
+#UNUSED
 # displays team_combinations in 2 scrollable boxes holding highest absolute value correlations
 def all_correlation_combinations(team, selected_stats, pos_widget, neg_widget):
 
