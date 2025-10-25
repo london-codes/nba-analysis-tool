@@ -27,7 +27,6 @@ def player_pair_all_permutations_rcoe(player1,player2,array_stats):
         corres.append(corr)
     return corres
 
-
 # gives all combinations for 2 players in a team and all possible permutations for selected stats
 def team_combinations(team,stats):
     correlations=[]
