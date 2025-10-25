@@ -22,11 +22,17 @@ selected_player1 = tk.StringVar(value='choose team')
 selected_player2 = tk.StringVar(value='choose team')
 selected_player1_stat = tk.StringVar(value='PTS')
 selected_player2_stat = tk.StringVar(value='PTS')
+selected_min_number_of_games = tk.IntVar(value=10)
 
 # region BUTTONS AND DROP DOWN MENUS
 # select team to get combinations for
 team_dropdown = tk.OptionMenu(root, selected_team, *teams.keys())
 team_dropdown.place(x=0,y=0)
+
+#button to select minimum number of games that players need to have played together with
+numbers = list(range(5, 61, 5))
+number_dropdown = tk.OptionMenu(root, selected_min_number_of_games, *numbers)
+number_dropdown.place(x=200, y=0)
 
 # choose stats that will give all combinations in the text box
 list_stats_selection = tk.Listbox(root, selectmode='multiple',height=8)
@@ -84,7 +90,7 @@ def confirm_selection():
     selected_stats= []                                          # get array of the selected stats
     for i in indices:
         selected_stats.append(array_of_all_stats[i])
-    all_correlation_combinations_interactive(team_choice,selected_stats, pos_box, neg_box)
+    all_correlation_combinations_interactive(team_choice,selected_stats, pos_box, neg_box,selected_min_number_of_games.get())
 
 
 
