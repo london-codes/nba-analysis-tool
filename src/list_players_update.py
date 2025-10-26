@@ -15,6 +15,41 @@ Important Notes:
 
 """
     #   updates:
+
+#ATL
+#update_player_csv('https://www.basketball-reference.com/players/k/kennalu01/gamelog/2025','luke') # no 2025
+update_player_csv('https://www.basketball-reference.com/players/o/okongon01/gamelog/2025','onyeka')
+update_player_csv('https://www.basketball-reference.com/players/j/johnsja05/gamelog/2025','jalen')
+update_player_csv('https://www.basketball-reference.com/players/y/youngtr01/gamelog/2025','trae')
+update_player_csv('https://www.basketball-reference.com/players/d/daniedy01/gamelog/2025','dyson')
+#update_player_csv('https://www.basketball-reference.com/players/p/porzikr01/gamelog/2025','kristaps') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/a/alexani01/gamelog/2025','nickeil') # no 2025
+
+
+#cha / cho
+
+update_player_csv('https://www.basketball-reference.com/players/b/bridgmi02/gamelog/2025','miles')
+update_player_csv('https://www.basketball-reference.com/players/b/ballla01/gamelog/2025','lamelo')
+update_player_csv('https://www.basketball-reference.com/players/m/millebr02/gamelog/2025','brandon')
+update_player_csv('https://www.basketball-reference.com/players/m/manntr01/gamelog/2025','tre')
+update_player_csv('https://www.basketball-reference.com/players/s/salauti01/gamelog/2025','tidjane')
+update_player_csv('https://www.basketball-reference.com/players/d/diabamo01/gamelog/2025','moussa')
+#update_player_csv('https://www.basketball-reference.com/players/s/sextoco01/gamelog/2025','collin') # no 2025
+# update_player_csv('https://www.basketball-reference.com/players/j/jamessi01/gamelog/2026','kion') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/k/kalkbry01/gamelog/2026','ryan') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/k/knuepko01/gamelog/2026','kon') # no 2025
+
+# chi
+update_player_csv('https://www.basketball-reference.com/players/w/willipa01/gamelog/2025','patrick')
+update_player_csv('https://www.basketball-reference.com/players/v/vucevni01/gamelog/2025','nikola')
+update_player_csv('https://www.basketball-reference.com/players/d/dosunay01/gamelog/2025','ayo')
+update_player_csv('https://www.basketball-reference.com/players/g/giddejo01/gamelog/2025','josh')
+update_player_csv('https://www.basketball-reference.com/players/s/smithja04/gamelog/2025','jalen')
+update_player_csv('https://www.basketball-reference.com/players/b/buzelma01/gamelog/2025','matas')
+#update_player_csv('https://www.basketball-reference.com/players/h/huertke01/gamelog/2025','kevin') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/j/jonestr01/gamelog/2025','tre') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/o/okorois01/gamelog/2025','isaac') # no 2025
+
 """
 #cleveland
 update_player_csv('https://www.basketball-reference.com/players/a/allenja01/gamelog/2025','jarrett')
@@ -44,14 +79,28 @@ update_player_csv('https://www.basketball-reference.com/players/g/greendr01/game
 update_player_csv('https://www.basketball-reference.com/players/k/kuminjo01/gamelog/2025','jonathan')
 update_player_csv('https://www.basketball-reference.com/players/p/podzibr01/gamelog/2025','brandin')
 update_player_csv('https://www.basketball-reference.com/players/h/hieldbu01/gamelog/2025','buddy')
-""""""
+"""
+"""
 #ind
 update_player_csv('https://www.basketball-reference.com/players/n/nembhan01/gamelog/2025','andrew')
 update_player_csv('https://www.basketball-reference.com/players/n/nesmiaa01/gamelog/2025','aaron')
 update_player_csv('https://www.basketball-reference.com/players/m/mathube01/gamelog/2025','bennedict')
 update_player_csv('https://www.basketball-reference.com/players/s/siakapa01/gamelog/2025','pascal')
+#update_player_csv('https://www.basketball-reference.com/players/p/peterta01/gamelog/2026','taelon') # no 2025
+update_player_csv('https://www.basketball-reference.com/players/t/toppiob01/gamelog/2025','obi')
+"""
+# mem
 
+update_player_csv('https://www.basketball-reference.com/players/j/jacksja02/gamelog/2025','jaren')
+update_player_csv('https://www.basketball-reference.com/players/m/moranja01/gamelog/2025','ja')
+update_player_csv('https://www.basketball-reference.com/players/a/aldamsa01/gamelog/2025','santi')
+update_player_csv('https://www.basketball-reference.com/players/w/wellsja01/gamelog/2025','jaylen')
+#update_player_csv('https://www.basketball-reference.com/players/l/landajo01/gamelog/2025','jock') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/c/caldwke01/gamelog/2025','kentavious') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/s/smallja01/gamelog/2026','javon') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/c/cowarce01/gamelog/2026','cedric') # no 2025
 
+"""
 #min
 update_player_csv('https://www.basketball-reference.com/players/r/reidna01/gamelog/2025','naz')
 update_player_csv('https://www.basketball-reference.com/players/m/mcdanja02/gamelog/2025','jaden')
@@ -92,6 +141,17 @@ update_player_csv('https://www.basketball-reference.com/players/c/carusal01/game
 update_player_csv('https://www.basketball-reference.com/players/h/harteis01/gamelog/2025','isaiah')
 
 """
+#phi
+
+update_player_csv('https://www.basketball-reference.com/players/o/oubreke01/gamelog/2025','kelly')
+update_player_csv('https://www.basketball-reference.com/players/e/embiijo01/gamelog/2025','joel') # bareley 2025
+update_player_csv('https://www.basketball-reference.com/players/m/maxeyty01/gamelog/2025','tyrese')
+update_player_csv('https://www.basketball-reference.com/players/b/bonaad01/gamelog/2025','adem')
+#update_player_csv('https://www.basketball-reference.com/players/g/grimequ01/gamelog/2025','quentin') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/b/barlodo01/gamelog/2025','dominick') # no 2025
+#update_player_csv('https://www.basketball-reference.com/players/e/edgecvj01/gamelog/2026','vj') # no 2025
+
+
 #pho/phx
 update_player_csv('https://www.basketball-reference.com/players/a/allengr01/gamelog/2025','grayson')
 update_player_csv('https://www.basketball-reference.com/players/o/onealro01/gamelog/2025','royce')

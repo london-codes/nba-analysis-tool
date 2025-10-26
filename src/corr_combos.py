@@ -28,18 +28,22 @@ def player_pair_all_permutations_rcoe(player1,player2,array_stats):
     return corres
 
 # gives all combinations for 2 players in a team and all possible permutations for selected stats
-def team_combinations(team,stats):
+def team_combinations(team,stats,selected_min_number_of_games):
     correlations=[]
 
     for player1, player2 in combinations(team, 2):
+        #defintley not the most effeicenitent way but of the players don't have specific number of games played together doesn't calculate correlation
+        test=pd.merge(player1,player2, on='Date')
+        if len(test) < selected_min_number_of_games:
+            continue
         r = player_pair_all_permutations_rcoe(player1, player2, stats)
         correlations.append(r)
     return correlations
 
 # displays team_combinations in 2 scrollable boxes holding highest absolute value correlations, can be clicekd to graph
-def all_correlation_combinations_interactive(team, selected_stats, pos_box, neg_box):
+def all_correlation_combinations_interactive(team, selected_stats, pos_box, neg_box,selected_min_number_of_games):
 
-    team_combo = team_combinations(team, selected_stats)
+    team_combo = team_combinations(team, selected_stats,selected_min_number_of_games)
     r_coe = 0
 
     #reset the widget so old text goes new text can now be inserted
