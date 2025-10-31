@@ -9,8 +9,8 @@ The program automates data collection from [Basketball Reference](https://www.ba
 - To update stats from the regular season run list_players_update.py module. User can also add players not currently database there as well.
 
 ```bash
-git clone https://github.com/london-codes/Basketball-Statistics-Analysis-Tool.git
-cd Basketball-Statistics-Analysis-Tool
+git clone https://github.com/london-codes/nba-analysis-tool.git
+cd nba-analysis-tool
 pip install -r requirements.txt
 ```
 
